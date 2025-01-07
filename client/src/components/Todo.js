@@ -8,21 +8,13 @@ const Todo = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [selectedTodos, setSelectedTodos] = useState([]); // Seçilen görevleri tutan state
-  const API_URL = 'http://localhost:5000/api/todos'; // Backend URL
+  const API_URL = '/api/todos'; // Backend URL
 
   // Görevleri listele
   const fetchTodos = async () => {
     setLoading(true);
-    
-    // Token'ı localStorage'dan al
-    const token = localStorage.getItem('token');  // token'ı kaydettiğiniz yer
-  
     try {
-      const response = await axios.get(API_URL, {
-        headers: {
-          'Authorization': `Bearer ${token}`,  // Token'ı başlığa ekliyoruz
-        }
-      });
+      const response = await axios.get(API_URL);
       const tasks = response.data.map(todo => ({
         ...todo,
         isCompleted: todo.isCompleted || false, // Eğer isCompleted undefined ise false olarak ayarla
