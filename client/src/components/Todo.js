@@ -8,7 +8,7 @@ const Todo = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [selectedTodos, setSelectedTodos] = useState([]); // Seçilen görevleri tutan state
-  const API_URL = '/api/todos'; // Backend URL
+  const API_URL = 'http://104.248.139.185:5000/api/todos'; // Backend URL
 
   // Görevleri listele
   const fetchTodos = async () => {

@@ -14,7 +14,7 @@ const LoginPage = () => {
 
     try {
       // Backend'e login isteği gönder
-      const response = await axios.post('http://104.248.139.185/api/auth/login', {
+      const response = await axios.post('http://104.248.139.185:5000/api/auth/login', {
         email: values.email,
         password: values.password,
       });

@@ -17,7 +17,7 @@ const RegisterPage = () => {
     setLoading(true);
   
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/register', {
+      const response = await axios.post('http://104.248.139.185:5000/api/auth/register', {
         email,
         password,  // Şifreyi olduğu gibi gönderiyoruz
       });
