@@ -1,13 +1,17 @@
 const mongoose = require('mongoose');
+require('dotenv').config(); // .env dosyasını yükle
 
 const connectDB = async () => {
   try {
-    const mongoURI = 'mongodb://127.0.0.1:27017/login-project_db';  // MongoDB bağlantı dizesi
-    await mongoose.connect(mongoURI);  // Artık useNewUrlParser ve useUnifiedTopology opsiyonlarına gerek yok
-    console.log('MongoDB veritabanına bağlanıldı...');
+    const mongoURI = process.env.MONGO_URI; // .env dosyasındaki URI'yı al
+    await mongoose.connect(mongoURI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log('MongoDB Atlas veritabanına bağlanıldı...');
   } catch (err) {
     console.error('MongoDB bağlantı hatası:', err.message);
-    process.exit(1);  // Sunucu başlatmayı durdurur, MongoDB bağlanmadığında hata verir
+    process.exit(1); // Sunucu başlatmayı durdurur
   }
 };
 

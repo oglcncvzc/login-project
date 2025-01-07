@@ -9,15 +9,19 @@ const RegisterPage = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async (values) => {
-    const { email, password } = values; // name artık alınmıyor
+    const { email, password } = values;
+    
+    console.log('Gönderilen email:', email);  // Email'i logla
+    console.log('Gönderilen şifre:', password);  // Şifreyi logla
+  
     setLoading(true);
-
+  
     try {
       const response = await axios.post('http://localhost:5000/api/auth/register', {
         email,
         password,  // Şifreyi olduğu gibi gönderiyoruz
       });
-
+  
       setLoading(false);
       alert('Kayıt başarılı!');
       navigate('/login'); // Kayıt başarılı olduğunda login sayfasına yönlendir
@@ -26,6 +30,7 @@ const RegisterPage = () => {
       setError(err.response?.data?.message || 'Kayıt sırasında bir hata oluştu');
     }
   };
+  
 
   return (
     <div style={{ maxWidth: '400px', margin: '0 auto', padding: '20px' }}>

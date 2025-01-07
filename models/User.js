@@ -15,15 +15,16 @@ const UserSchema = new mongoose.Schema({
 
 // Şifreyi kaydetmeden önce hash'le
 UserSchema.pre('save', async function (next) {
+  console.log('pre save çalışıyor!'); // Çalıştığından emin olun
   if (!this.isModified('password')) return next();
 
-  const salt = await bcrypt.genSalt(10); // Salt üretimi
-  const hashedPassword = await bcrypt.hash(this.password, salt);  // Şifreyi hash'le
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(this.password, salt);
 
-  console.log('Hashlenmiş şifre:', hashedPassword); // Hash'lenmiş şifreyi logla
-
-  this.password = hashedPassword; // Hash'lenmiş şifreyi kaydet
+  console.log('Hashlenmiş şifre:', hashedPassword);
+  this.password = hashedPassword;
   next();
 });
+
 
 module.exports = mongoose.model('User', UserSchema);
